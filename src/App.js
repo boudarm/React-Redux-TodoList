@@ -1,25 +1,18 @@
-import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import Dashboard from './components/Dashboard';
-import SignIn from './components/SignIn';
-import PrivateRoute from './components/PrivateRoute';
-import PublicRoute from './components/PublicRoute';
+import { Provider } from 'react-redux';
+import React from 'react';
+//import logo from './logo.svg';
+import store from './store';
+import { TodoListStore } from './components/TodoList';
+import { TodoFilterStore } from './components/TodoFilter';
 
-class App extends Component {
-
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <PublicRoute restricted={false} component={Home} path="/" exact />
-          <PublicRoute restricted={true} component={SignIn} path="/signin" exact />
-          <PrivateRoute component={Dashboard} path="/dashboard" exact />
-        </Switch>
-      </BrowserRouter>
-    );
-  }
+function App() {
+	return (
+		<Provider store={store}>
+			<TodoListStore />
+			<TodoFilterStore />
+		</Provider>
+	);
 }
 
 export default App;
